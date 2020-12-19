@@ -1,0 +1,37 @@
+
+.home-top{
+    height: 50px;
+    background-color:#EFEFF4;
+    padding-top: 15px;
+}
+
+.home-bottom{
+    height: 30px;
+   font-size: 30px;
+    position: absolute;
+    top: 500px;
+    
+    
+    
+}
+.home-x{
+    height: 40px;
+    width: 400px;
+    background-color:#EFEFF4;
+   
+    
+   
+}
+.homespan{
+    position: relative;
+    top:15px;
+    left: -80px;
+    font-size: 12px;
+    padding-top: 30px;
+    padding-left: 50px;
+
+}
+.iconspan{
+    font-size: 12px;
+    color:#b0b0b0;
+}

@@ -1,0 +1,38 @@
+
+
+.option-text{
+    
+    width: 100px;
+    display: inline-block;
+}
+.option-ratio{
+    height:2px;
+    background-color: #4285F4;
+}
+.avatars{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.avatars > li{
+    display: inline-block;
+}
+
+.avatar{
+    width:32px;
+    height:32px;
+    border-radius:100%;
+
+
+}
+.viewlist{
+    padding: 0px;
+    margin: 0px 10px 0 10px;
+    list-style: none;
+}
+
+.inputlist{
+    margin-right: 100px;
+    display: none;
+}
+

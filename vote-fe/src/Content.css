@@ -1,0 +1,19 @@
+
+.active{
+    
+    /* width: 100px; */
+    border-bottom: 2px solid #0084ff;
+}
+.sign-in{
+    width: 100px;
+    position: relative;
+    left: 80px;
+    top:10px;
+}
+.sign-up{
+    width: 100px;
+    position: relative;
+    left: 200px;
+    bottom:12px;
+}
+

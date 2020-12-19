@@ -1,0 +1,29 @@
+.create{
+   width: 400px;
+   text-align: left;
+}
+.create-x{
+    background-color: #EFEFF4;
+    margin-top: 20px;
+    height: 20px;
+}
+.create-bottom{
+    width: 100%;
+    text-align: left;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.create-input:focus{
+    outline: 0;
+    border-bottom:1px solid rgb(145, 49, 49);
+}
+.create-input:hover{
+    outline: 0;
+    border-bottom:1px solid rgb(195, 195, 195);
+}
+.create-input{
+    border-bottom:5px solid rgb(195, 195, 195);
+
+} 
+
