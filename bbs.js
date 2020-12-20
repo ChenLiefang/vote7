@@ -7,16 +7,37 @@ const multer = require('multer')
 const svgCaptcha = require('svg-captcha');
 const WebSocket = require('ws')
 const http = require('http')
+const https = require('https')
+const fs = require('fs')
+const fsp = require('fs').promises
 const _ = require('lodash')
 
 
 const uploader = multer({ dest: __dirname + '/uploads/' })
 
 const app = express()
-const port = 8081
+// const port = 8081
 
-const server = http.createServer(app) //express返回的app就是用来传给createServer的
-const wss = new WebSocket.Server({server})
+// const server = http.createServer(app) //express返回的app就是用来传给createServer的
+const server = http.createServer((req, res) => {
+	res.writeHead(302, { Location: `https://${req.headers.host}${req.url}` });
+	res.end();
+}); //*跳转到https
+
+server.listen(8081)
+
+
+const servers = https.createServer(
+	{
+		key: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.key'
+		),
+		cert: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.cer'
+		),
+	},
+	app
+);
+
+const wss = new WebSocket.Server({server:servers})
 
 //投票id到订阅这个投票信息更新的websocke的映射 
 var voteIdMapWs ={}
@@ -424,7 +445,11 @@ app.get('/user/:id', async(req, res, next) => {
         res.end('查无此人')
     }
 })
-server.listen(port, '127.0.0.1', () => {
-    console.log('server listening on port', port)
-        // open('http://localhost:' + port)
-})
+// server.listen(port, '127.0.0.1', () => {
+//     console.log('server list ening on port', port)
+//         // open('http://localhost:' + port)
+// })
+
+servers.listen(443, () => {
+	console.log('listening on port 443');
+});
