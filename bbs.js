@@ -20,7 +20,7 @@ const app = express()
 
 // const server = http.createServer(app) //express返回的app就是用来传给createServer的
 const server = http.createServer((req, res) => {
-	res.writeHead(302, { Location: `https://${req.headers.host}${req.url}` });
+	res.writeHead(302, { Location: `https://vote.aijj.xyz${req.url}` });
 	res.end();
 }); //*跳转到https
 
@@ -28,14 +28,11 @@ server.listen(8081)
 
 
 const servers = https.createServer(
-	{
-		key: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.key'
-		),
-		cert: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.cer'
-		),
-	},
-	app
+    {key: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.key'),
+    cert: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.cer'),
+	}
 );
+servers.on('request',app)
 
 const wss = new WebSocket.Server({server:servers})
 
