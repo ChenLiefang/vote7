@@ -16,7 +16,7 @@ export default function Login(props){
 
     async function handleLogin(e){
         e.preventDefault()
-      var res=await Axios('http://localhost:3000/login',{
+      var res=await Axios('/login',{
             method:'post',
             withCredentials:true, 
             data:{
@@ -44,7 +44,7 @@ export default function Login(props){
                 <form className="login-from" onSubmit={handleLogin}>
                     <Input addonBefore="Username:"  style={{width:300}} type="text"  onInput={(e)=>setname(e.target.value)} value={nameValue}/><br/>
                     <Input addonBefore="Password:" style={{width:300,margin:10}} type="password" onInput={(e)=>setpassword(e.target.value)} value={passwordValue}/><br/>
-                    <img src="http://localhost:8081/captcha" alt=""/><br/>
+                    <img src="/captcha" alt=""/><br/>
                     <Input addonBefore="captcha:"  style={{width:300}} type="text"  onInput={(e)=>setcaptcha(e.target.value)} value={captchaValue}/><br/>
                     <Button htmlType="submit" type="primary" style={{width:200,margin:20}}>登录</Button>
                 </form>

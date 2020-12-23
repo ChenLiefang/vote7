@@ -10,17 +10,18 @@ const http = require('http')
 const https = require('https')
 const fs = require('fs')
 const fsp = require('fs').promises
+
 const _ = require('lodash')
 
+const app = express()
 
 const uploader = multer({ dest: __dirname + '/uploads/' })
 
-const app = express()
 // const port = 8081
 
 // const server = http.createServer(app) //express返回的app就是用来传给createServer的
 const server = http.createServer((req, res) => {
-	res.writeHead(302, { Location: `https://vote.aijj.xyz${req.url}` });
+	res.writeHead(302, { Location: `https://${req.headers.host}${req.url}` });
 	res.end();
 }); //*跳转到https
 
@@ -30,9 +31,10 @@ server.listen(8081)
 const servers = https.createServer(
     {key: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.key'),
     cert: fs.readFileSync('/root/.acme.sh/vote.aijj.xyz/vote.aijj.xyz.cer'),
-	}
+    },
+    app
 );
-servers.on('request',app)
+// servers.on('request',app)
 
 const wss = new WebSocket.Server({server:servers})
 
@@ -69,6 +71,8 @@ dbPromise.then(value => {
 
 app.locals.pretty = true //美化页面
 
+
+
 //解决跨域问题
 app.use(cors({
     maxAge: 86400,
@@ -85,6 +89,7 @@ app.use((req, res, next) => {
 //         console.log(data.toString())
 //     })
 // })
+app.use(express.static(__dirname + '/build'));
 app.use(express.static(__dirname + '/static'))
 app.use('/uploads', express.static(__dirname + '/uploads'))
 app.use(express.json())
@@ -320,7 +325,7 @@ app.route('/forgot').post(async(req, res, next) => {
                 delete changePassworldMap[changePassworId]
             }, 1000 * 60 * 10)
 
-            var changePassLink = 'http://localhost:8081/change-password/' + changePassworId
+            var changePassLink = '/change-password/' + changePassworId
             console.log(changePassLink)
             res.end('A link has send to you email,click the link to change password')
             console.log(changePassworldMap)

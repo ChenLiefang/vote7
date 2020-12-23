@@ -37,7 +37,7 @@ export default function ViewVote({userInfo = {} }){
  
     useEffect(()=>{
         //用于接收某个vote的新的选票信息的
-        var ws = new WebSocket(`ws://localhost:8081/vote/${id}`)
+        var ws = new WebSocket(`/vote/${id}`)
 
         ws.onmessage = e=>{
             setVotings(JSON.parse(e.data)) 
